@@ -1,2 +1,4 @@
-import { userResolvers } from "../Users";
-export const resolvers = [userResolvers];
+import { UserResolver } from "../Users";
+// export const resolvers = [UserResolver];
+
+export { UserResolver };

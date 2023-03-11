@@ -1,8 +1,14 @@
 import { AppDataSource } from "../config/dbConfig";
 import { NextFunction, Request, Response } from "express";
 import { User } from "./UserEntity";
+import { UserService } from "./UserService";
 
 export class UserController {
+  userService: UserService;
+
+  constructor() {
+    this.userService = new UserService();
+  }
   private userRepository = AppDataSource.getRepository(User);
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -15,12 +21,7 @@ export class UserController {
   // @ts-ignore
   async one(request: Request, response: Response, next: NextFunction) {
     const id = request.params.id;
-    const user = await this.userRepository.findOneById(id);
-
-    if (!user) {
-      return "unregistered user";
-    }
-    return user;
+    return await this.userService.getOne(id);
   }
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment

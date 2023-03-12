@@ -7,7 +7,7 @@ import { Container } from "typedi";
 
 import { AppDataSource } from "./config/dbConfig";
 
-import { UserResolver } from "./resolvers";
+import { resolvers } from "./resolvers";
 import { expressRoutes } from "./routes";
 
 const PORT = process.env.PORT || 4000;
@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 4000;
 AppDataSource.initialize()
   .then(async () => {
     const schema = await buildSchema({
-      resolvers: [UserResolver],
+      resolvers,
       container: Container,
       emitSchemaFile: true, // add this
       validate: false,

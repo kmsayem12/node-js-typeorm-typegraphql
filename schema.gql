@@ -3,10 +3,36 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type Addresses {
+  city: String!
+  post: String!
+  street: String!
+}
+
+input AddressesCreate {
+  city: String!
+  post: String!
+  street: String!
+}
+
 type Mutation {
   createUser(data: UserCreate!): User!
   deleteUser(id: String!): Boolean!
   updateUser(id: String!, updateData: UserUpdate!): User!
+}
+
+type Profile {
+  address: [Addresses!]!
+  education: String
+  gender: String!
+  phone: String!
+}
+
+input ProfileCreate {
+  address: [AddressesCreate!]
+  education: String
+  gender: String
+  phone: String
 }
 
 type Query {
@@ -20,6 +46,7 @@ type User {
   id: String!
   isActive: Boolean!
   lastName: String!
+  profile: Profile!
 }
 
 input UserCreate {
@@ -27,6 +54,7 @@ input UserCreate {
   firstName: String!
   isActive: Boolean
   lastName: String!
+  profile: ProfileCreate
 }
 
 input UserUpdate {
@@ -34,4 +62,5 @@ input UserUpdate {
   firstName: String
   isActive: Boolean
   lastName: String
+  profile: ProfileCreate
 }

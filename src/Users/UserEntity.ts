@@ -68,7 +68,7 @@ export class ProfileCreate {
 export class User extends BaseEntity {
   @ObjectIdColumn()
   @Field(() => String)
-  id: string;
+  _id: string;
 
   @Column()
   @Field(() => String)

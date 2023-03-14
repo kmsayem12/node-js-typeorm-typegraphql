@@ -1,4 +1,6 @@
 import { Service } from "typedi";
+const ObjectID = require("mongodb").ObjectID;
+
 import { User, UserCreate, UserUpdate } from "./UserEntity";
 
 @Service()
@@ -8,7 +10,9 @@ export class UserService {
   };
 
   getOne = async (id: string): Promise<User | undefined> => {
-    const user = await User.findOneById(id);
+    const user = await User.findOne({
+      where: { _id: new ObjectID(id) },
+    });
 
     if (!user) {
       throw new Error(`The user with id: ${id} does not exist!`);
@@ -21,8 +25,9 @@ export class UserService {
   };
 
   update = async (id: string, updateUserInput: UserUpdate): Promise<User> => {
-    const UserFound = await User.findOneById(id);
-    console.log({ UserFound });
+    const UserFound = await User.findOne({
+      where: { _id: new ObjectID(id) },
+    });
 
     if (!UserFound) {
       throw new Error(`The User with id: ${id} does not exist!`);
@@ -35,7 +40,9 @@ export class UserService {
   };
 
   delete = async (id: string): Promise<boolean> => {
-    const UserFound = await User.findOneById(id);
+    const UserFound = await User.findOne({
+      where: { _id: new ObjectID(id) },
+    });
 
     if (!UserFound) {
       throw new Error(`The User with id: ${id} does not exist!`);

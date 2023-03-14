@@ -41,9 +41,9 @@ type Query {
 }
 
 type User {
+  _id: String!
   age: Int
   firstName: String!
-  id: String!
   isActive: Boolean!
   lastName: String!
   profile: Profile!

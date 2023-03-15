@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { User, UserCreate, UserUpdate } from "./UserEntity";
+import { UserCreate, UserUpdate } from "./dto/UserDto";
+import { User } from "./UserEntity";
 import { UserService } from "./UserService";
 
 export class UserController {

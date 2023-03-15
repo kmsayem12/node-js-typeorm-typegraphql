@@ -1,7 +1,8 @@
 import { Service } from "typedi";
-const ObjectID = require("mongodb").ObjectID;
+import { UserCreate, UserUpdate } from "./dto/UserDto";
+import { User } from "./UserEntity";
 
-import { User, UserCreate, UserUpdate } from "./UserEntity";
+const ObjectID = require("mongodb").ObjectID;
 
 @Service()
 export class UserService {

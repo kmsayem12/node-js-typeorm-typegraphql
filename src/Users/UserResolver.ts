@@ -1,6 +1,7 @@
 import { Resolver, Query, Mutation, Arg } from "type-graphql";
 import { Service } from "typedi";
-import { User, UserCreate, UserUpdate } from "./UserEntity";
+import { UserCreate, UserUpdate } from "./dto/UserDto";
+import { User } from "./UserEntity";
 import { UserService } from "./UserService";
 
 @Service()

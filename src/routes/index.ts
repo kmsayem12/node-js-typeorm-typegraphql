@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
+import { authRoutes } from "../Auth";
 // import { AppDataSource } from "../config/dbConfig";
 import { userRoutes } from "../Users";
 // import { UserEntity } from "../Users";
 
-export const Routes = [...userRoutes];
+export const Routes = [...userRoutes, ...authRoutes];
 
 // register express routes from defined application routes
 export const expressRoutes = async (app: any, port: string | number) => {

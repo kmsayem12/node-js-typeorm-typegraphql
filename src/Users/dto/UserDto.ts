@@ -1,3 +1,4 @@
+import { IsEmail, IsNotEmpty } from "class-validator";
 import { Field, InputType } from "type-graphql";
 import { User } from "../UserEntity";
 
@@ -37,6 +38,12 @@ export class UserCreate implements Partial<User> {
   lastName: string;
 
   @Field()
+  email: string;
+
+  @Field()
+  password: string;
+
+  @Field()
   age: number;
 
   @Field({ nullable: true })
@@ -62,4 +69,16 @@ export class UserUpdate implements Partial<User> {
 
   @Field(() => ProfileCreate, { nullable: true })
   profile: ProfileCreate;
+}
+
+@InputType()
+export class UserLogin {
+  @IsEmail()
+  @IsNotEmpty()
+  @Field()
+  email: string;
+
+  @IsNotEmpty()
+  @Field()
+  password: string;
 }

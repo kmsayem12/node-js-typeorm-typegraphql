@@ -22,25 +22,17 @@ export class UserController {
   }
 
   async save(request: Request): Promise<User> {
-    const { firstName, lastName, age } = request.body as UserCreate;
-    const user = Object.assign(new User(), {
-      firstName,
-      lastName,
-      age,
-    });
-
+    const data = request.body as UserCreate;
+    const user = Object.assign(new User(), { ...data });
+    //Hash the password, to securely store on DB
+    user.hashPassword();
     return this.userService.create(user);
   }
 
   async update(request: Request): Promise<User> {
     const id = request.params.id;
-    const { firstName, lastName, age } = request.body as UserUpdate;
-    const user = Object.assign(new User(), {
-      firstName,
-      lastName,
-      age,
-    });
-
+    const data = request.body as UserUpdate;
+    const user = Object.assign(new User(), { ...data });
     return this.userService.update(id, user);
   }
 

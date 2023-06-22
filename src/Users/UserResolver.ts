@@ -21,7 +21,11 @@ export class UserResolver {
 
   @Mutation(() => User)
   async createUser(@Arg("data") data: UserCreate): Promise<User> {
-    return await this.userService.create(data);
+    const user = Object.assign(new User(), { ...data });
+    //Hash the password, to securely store on DB
+    user.hashPassword();
+
+    return await this.userService.create(user);
   }
 
   @Mutation(() => User)

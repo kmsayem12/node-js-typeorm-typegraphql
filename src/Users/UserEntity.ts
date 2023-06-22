@@ -1,5 +1,6 @@
 import { Entity, Column, ObjectIdColumn } from "typeorm";
 import { ObjectType, Field, Int } from "type-graphql";
+import * as bcrypt from "bcryptjs";
 import { Model } from "../model";
 
 @Entity()
@@ -57,6 +58,15 @@ export class User extends Model {
   @Field(() => Int, { nullable: true })
   age?: number;
 
+  //@Index("email_index")
+  @Column()
+  @Field(() => String)
+  email: string;
+
+  @Column()
+  @Field(() => String)
+  password: string;
+
   @Column({ default: true })
   @Field(() => Boolean)
   isActive?: boolean;
@@ -64,4 +74,12 @@ export class User extends Model {
   @Column(() => Profile)
   @Field(() => Profile)
   profile: Profile;
+
+  hashPassword() {
+    this.password = bcrypt.hashSync(this.password, 8);
+  }
+
+  checkIfUnencryptedPasswordIsValid(unencryptedPassword: string) {
+    return bcrypt.compareSync(unencryptedPassword, this.password);
+  }
 }
